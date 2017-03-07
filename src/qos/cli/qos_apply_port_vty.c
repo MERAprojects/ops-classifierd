@@ -157,7 +157,7 @@ DEFUN(qos_apply_port,
 {
     char aubuf[QOS_CLI_AUDIT_BUFFER_SIZE] = "op=CLI: apply qos";
 
-    const char *port_name = (char*) vty->index;
+    const char *port_name = (char*)((uintptr_t)vty->index);
     qos_audit_encode(aubuf, sizeof(aubuf), "port_name", port_name);
 
     const char *schedule_profile_name = argv[0];
@@ -187,7 +187,7 @@ DEFUN
 {
     char aubuf[QOS_CLI_AUDIT_BUFFER_SIZE] = "op=CLI: apply qos";
 
-    const char *port_name = (char*) vty->index;
+    const char *port_name = (char*)((uintptr_t)vty->index);
     qos_audit_encode(aubuf, sizeof(aubuf), "port_name", port_name);
 
     const char *schedule_profile_name = OVSREC_QUEUE_ALGORITHM_STRICT;
@@ -260,7 +260,7 @@ DEFUN(qos_apply_port_no,
 {
     char aubuf[QOS_CLI_AUDIT_BUFFER_SIZE] = "op=CLI: no apply qos";
 
-    const char *port_name = (char*) vty->index;
+    const char *port_name = (char*)((uintptr_t)vty->index);
     qos_audit_encode(aubuf, sizeof(aubuf), "port_name", port_name);
 
     int result = qos_apply_port_no_command(port_name);

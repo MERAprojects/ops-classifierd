@@ -353,7 +353,7 @@ qos_schedule_profile_command_commit(const char *profile_name)
 
     strncpy(g_profile_name, profile_name, sizeof(g_profile_name));
     vty->node = QOS_SCHEDULE_PROFILE_NODE;
-    vty->index = g_profile_name;
+    vty->index = (uintptr_t)g_profile_name;
     return CMD_SUCCESS;
 }
 
@@ -627,7 +627,7 @@ DEFUN(qos_schedule_profile_strict,
 {
     char aubuf[QOS_CLI_AUDIT_BUFFER_SIZE] = "op=CLI: strict queue";
 
-    const char *profile_name = (char*) vty->index;
+    const char *profile_name = (char*)((uintptr_t)vty->index);
     qos_audit_encode(aubuf, sizeof(aubuf), "profile_name", profile_name);
 
     const char *queue_num = argv[0];
@@ -795,7 +795,7 @@ DEFUN(qos_schedule_profile_strict_no,
 {
     char aubuf[QOS_CLI_AUDIT_BUFFER_SIZE] = "op=CLI: no strict queue";
 
-    const char *profile_name = (char*) vty->index;
+    const char *profile_name = (char*)((uintptr_t)vty->index);
     qos_audit_encode(aubuf, sizeof(aubuf), "profile_name", profile_name);
 
     const char *queue_num = argv[0];
@@ -910,7 +910,7 @@ DEFUN(qos_schedule_profile_dwrr,
 {
     char aubuf[QOS_CLI_AUDIT_BUFFER_SIZE] = "op=CLI: dwrr queue";
 
-    const char *profile_name = (char*) vty->index;
+    const char *profile_name = (char*)((uintptr_t)vty->index);
     qos_audit_encode(aubuf, sizeof(aubuf), "profile_name", profile_name);
 
     const char *queue_num = argv[0];
@@ -1041,7 +1041,7 @@ DEFUN(qos_schedule_profile_dwrr_no,
 {
     char aubuf[QOS_CLI_AUDIT_BUFFER_SIZE] = "op=CLI: no dwrr queue";
 
-    const char *profile_name = (char*) vty->index;
+    const char *profile_name = (char*)((uintptr_t)vty->index);
     qos_audit_encode(aubuf, sizeof(aubuf), "profile_name", profile_name);
 
     const char *queue_num = argv[0];

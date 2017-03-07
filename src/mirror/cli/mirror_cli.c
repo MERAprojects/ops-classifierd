@@ -279,12 +279,12 @@ cli_show_mirror_exec (const char *mirror_arg)
 
             atom.string = mirror_statistics[0];
             index = ovsdb_datum_find_key(datum, &atom, OVSDB_TYPE_STRING);
-            vty_out(vty, " Output Packets: %ld%s",
+            vty_out(vty, " Output Packets: %"PRId64"%s",
                        ((index == UINT_MAX)? 0 : datum->values[index].integer),
                                                                   VTY_NEWLINE);
             atom.string = mirror_statistics[1];
             index = ovsdb_datum_find_key(datum, &atom, OVSDB_TYPE_STRING);
-            vty_out(vty, " Output Bytes: %ld%s",
+            vty_out(vty, " Output Bytes: %"PRId64"%s",
                        ((index == UINT_MAX)? 0 : datum->values[index].integer),
                                                                   VTY_NEWLINE);
             break;
@@ -778,11 +778,11 @@ mirror_session_exec (const char* name, bool delete)
 
    if (delete) {
       vty->node = CONFIG_NODE;
-      vty->index = NULL;
+      vty->index = (uintptr_t)NULL;
    } else {
       strncpy (g_mirror_name, name, sizeof(g_mirror_name));
       vty->node = MIRROR_NODE;
-      vty->index = (void*)g_mirror_name;
+      vty->index = (uintptr_t)g_mirror_name;
    }
    return CMD_SUCCESS;
 }
@@ -815,7 +815,7 @@ source_iface_exec(const char* iface_name, const char* direction, bool delete)
       return CMD_ERR_NOTHING_TODO;
    }
 
-   if (vty->index == NULL) {
+   if (vty->index == (uintptr_t)NULL) {
       VLOG_ERR("Unable to locate mirror session");
       return CMD_ERR_NOTHING_TODO;
    }
@@ -826,10 +826,10 @@ source_iface_exec(const char* iface_name, const char* direction, bool delete)
       return CMD_OVSDB_FAILURE;
    }
 
-   mirror = retrieve_mirror_row((const char*)vty->index);
+   mirror = retrieve_mirror_row((const char*)((uintptr_t)vty->index));
    if (mirror == NULL) {
       vty_out (vty, "Mirror session %s doesn't exist%s",
-                                (const char*)vty->index,
+                                (const char*)((uintptr_t)vty->index),
                                             VTY_NEWLINE);
       return CMD_ERR_NOTHING_TODO;
    }
@@ -982,7 +982,7 @@ output_iface_exec(const char* iface_name, bool delete)
       return CMD_ERR_NOTHING_TODO;
    }
 
-   if (vty->index == NULL) {
+   if (vty->index == (uintptr_t)NULL) {
       VLOG_ERR("Unable to locate mirror session");
       return CMD_ERR_NOTHING_TODO;
    }
@@ -993,10 +993,10 @@ output_iface_exec(const char* iface_name, bool delete)
         return CMD_OVSDB_FAILURE;
    }
 
-   mirror = retrieve_mirror_row((const char*)vty->index);
+   mirror = retrieve_mirror_row((const char*)((uintptr_t)vty->index));
    if (mirror == NULL) {
       vty_out (vty, "Mirror session %s doesn't exist%s",
-                                (const char*)vty->index,
+                                (const char*)((uintptr_t)vty->index),
                                             VTY_NEWLINE);
       return CMD_ERR_NOTHING_TODO;
    }
@@ -1265,7 +1265,7 @@ mirror_activate (bool activate)
    enum ovsdb_idl_txn_status txn_status;
    const struct ovsrec_mirror *mirror = NULL;
 
-   if (NULL == vty->index) {
+   if ((uintptr_t)NULL == vty->index) {
       VLOG_ERR("Unable to locate mirror session");
       return CMD_ERR_NOTHING_TODO;
    }
@@ -1276,10 +1276,10 @@ mirror_activate (bool activate)
       return CMD_OVSDB_FAILURE;
    }
 
-   mirror = retrieve_mirror_row((const char*)vty->index);
+   mirror = retrieve_mirror_row((const char*)((uintptr_t)vty->index));
    if (mirror == NULL) {
       vty_out (vty, "Mirror session %s doesn't exist%s",
-                                (const char*)vty->index,
+                                (const char*)((uintptr_t)vty->index),
                                             VTY_NEWLINE);
       return CMD_ERR_NOTHING_TODO;
    }

@@ -129,7 +129,7 @@ remark all of them to 0 (Default)\n"
 {
     char aubuf[QOS_CLI_AUDIT_BUFFER_SIZE] = "op=CLI: qos trust";
 
-    const char *port_name = (char*) vty->index;
+    const char *port_name = (char*)((uintptr_t)vty->index);
     qos_audit_encode(aubuf, sizeof(aubuf), "port_name", port_name);
 
     const char *qos_trust_name = argv[0];
@@ -204,7 +204,7 @@ remark all of them to 0 (Default)\n"
 {
     char aubuf[QOS_CLI_AUDIT_BUFFER_SIZE] = "op=CLI: no qos trust";
 
-    const char *port_name = (char*) vty->index;
+    const char *port_name = (char*)((uintptr_t)vty->index);
     qos_audit_encode(aubuf, sizeof(aubuf), "port_name", port_name);
 
     int result = qos_trust_port_no_command(port_name);

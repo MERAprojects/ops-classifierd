@@ -111,7 +111,7 @@ DEFUN(qos_dscp_port,
 {
     char aubuf[QOS_CLI_AUDIT_BUFFER_SIZE] = "op=CLI: qos dscp";
 
-    const char *port_name = (char*) vty->index;
+    const char *port_name = (char*)((uintptr_t)vty->index);
     qos_audit_encode(aubuf, sizeof(aubuf), "port_name", port_name);
 
     const char *dscp_map_index = argv[0];
@@ -183,7 +183,7 @@ DEFUN(qos_dscp_port_no,
 {
     char aubuf[QOS_CLI_AUDIT_BUFFER_SIZE] = "op=CLI: no qos dscp";
 
-    const char *port_name = (char*) vty->index;
+    const char *port_name = (char*)((uintptr_t)vty->index);
     qos_audit_encode(aubuf, sizeof(aubuf), "port_name", port_name);
 
     int result = qos_dscp_port_no_command(port_name);

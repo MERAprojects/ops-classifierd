@@ -65,11 +65,11 @@ DEFUN (cli_access_list,
     }
 
     /* Same name can be used with different IP versions; consider name sub-index */
-    vty->index = acl_ip_version;
+    vty->index = (uintptr_t)acl_ip_version;
     vty->index_sub = acl_name;
     vty->node = ACCESS_LIST_NODE;
 
-    return cli_create_acl_if_needed(CONST_CAST(char*,vty->index),      /* Type */
+    return cli_create_acl_if_needed(CONST_CAST(char*,(char*)((uintptr_t)vty->index)),      /* Type */
                                     CONST_CAST(char*,vty->index_sub)); /* Name */
 }
 
@@ -245,7 +245,7 @@ DEFUN (cli_access_list_entry,
        ACE_ADDITIONAL_OPTIONS_HELPSTR
       )
 {
-    return cli_create_update_ace(CONST_CAST(char*,vty->index),     /* Type */
+    return cli_create_update_ace(CONST_CAST(char*,(char*)((uintptr_t)vty->index)),     /* Type */
                                  CONST_CAST(char*,vty->index_sub), /* Name */
                                  CONST_CAST(char*,argv[0]),        /* Sequence number */
                                  CONST_CAST(char*,argv[1]),        /* Action */
@@ -288,7 +288,7 @@ DEFUN (cli_access_list_entry_src_port_op,
        ACE_ADDITIONAL_OPTIONS_HELPSTR
       )
 {
-    return cli_create_update_ace(CONST_CAST(char*,vty->index),     /* Type */
+    return cli_create_update_ace(CONST_CAST(char*,(char*)((uintptr_t)vty->index)),     /* Type */
                                  CONST_CAST(char*,vty->index_sub), /* Name */
                                  CONST_CAST(char*,argv[0]),        /* Sequence number */
                                  CONST_CAST(char*,argv[1]),        /* Action */
@@ -331,7 +331,7 @@ DEFUN (cli_access_list_entry_src_port_range,
        ACE_ADDITIONAL_OPTIONS_HELPSTR
       )
 {
-    return cli_create_update_ace(CONST_CAST(char*,vty->index),     /* Type */
+    return cli_create_update_ace(CONST_CAST(char*,(char*)((uintptr_t)vty->index)),     /* Type */
                                  CONST_CAST(char*,vty->index_sub), /* Name */
                                  CONST_CAST(char*,argv[0]),        /* Sequence number */
                                  CONST_CAST(char*,argv[1]),        /* Action */
@@ -374,7 +374,7 @@ DEFUN (cli_access_list_entry_dst_port_op,
        ACE_ADDITIONAL_OPTIONS_HELPSTR
       )
 {
-    return cli_create_update_ace(CONST_CAST(char*,vty->index),     /* Type */
+    return cli_create_update_ace(CONST_CAST(char*,(char*)((uintptr_t)vty->index)),     /* Type */
                                  CONST_CAST(char*,vty->index_sub), /* Name */
                                  CONST_CAST(char*,argv[0]),        /* Sequence number */
                                  CONST_CAST(char*,argv[1]),        /* Action */
@@ -417,7 +417,7 @@ DEFUN (cli_access_list_entry_dst_port_range,
        ACE_ADDITIONAL_OPTIONS_HELPSTR
       )
 {
-    return cli_create_update_ace(CONST_CAST(char*,vty->index),     /* Type */
+    return cli_create_update_ace(CONST_CAST(char*,(char*)((uintptr_t)vty->index)),     /* Type */
                                  CONST_CAST(char*,vty->index_sub), /* Name */
                                  CONST_CAST(char*,argv[0]),        /* Sequence number */
                                  CONST_CAST(char*,argv[1]),        /* Action */
@@ -463,7 +463,7 @@ DEFUN (cli_access_list_entry_src_port_op_dst_port_op,
        ACE_ADDITIONAL_OPTIONS_HELPSTR
       )
 {
-    return cli_create_update_ace(CONST_CAST(char*,vty->index),     /* Type */
+    return cli_create_update_ace(CONST_CAST(char*,(char*)((uintptr_t)vty->index)),     /* Type */
                                  CONST_CAST(char*,vty->index_sub), /* Name */
                                  CONST_CAST(char*,argv[0]),        /* Sequence number */
                                  CONST_CAST(char*,argv[1]),        /* Action */
@@ -509,7 +509,7 @@ DEFUN (cli_access_list_entry_src_port_range_dst_port_range,
        ACE_ADDITIONAL_OPTIONS_HELPSTR
       )
 {
-    return cli_create_update_ace(CONST_CAST(char*,vty->index),     /* Type */
+    return cli_create_update_ace(CONST_CAST(char*,(char*)((uintptr_t)vty->index)),     /* Type */
                                  CONST_CAST(char*,vty->index_sub), /* Name */
                                  CONST_CAST(char*,argv[0]),        /* Sequence number */
                                  CONST_CAST(char*,argv[1]),        /* Action */
@@ -555,7 +555,7 @@ DEFUN (cli_access_list_entry_src_port_op_dst_port_range,
        ACE_ADDITIONAL_OPTIONS_HELPSTR
       )
 {
-    return cli_create_update_ace(CONST_CAST(char*,vty->index),     /* Type */
+    return cli_create_update_ace(CONST_CAST(char*,(char*)((uintptr_t)vty->index)),     /* Type */
                                  CONST_CAST(char*,vty->index_sub), /* Name */
                                  CONST_CAST(char*,argv[0]),        /* Sequence number */
                                  CONST_CAST(char*,argv[1]),        /* Action */
@@ -601,7 +601,7 @@ DEFUN (cli_access_list_entry_src_port_range_dst_port_op,
        ACE_ADDITIONAL_OPTIONS_HELPSTR
       )
 {
-    return cli_create_update_ace(CONST_CAST(char*,vty->index),     /* Type */
+    return cli_create_update_ace(CONST_CAST(char*,(char*)((uintptr_t)vty->index)),     /* Type */
                                  CONST_CAST(char*,vty->index_sub), /* Name */
                                  CONST_CAST(char*,argv[0]),        /* Sequence number */
                                  CONST_CAST(char*,argv[1]),        /* Action */
@@ -642,7 +642,7 @@ DEFUN (cli_access_list_entry_no_seq,
        ACE_ADDITIONAL_OPTIONS_HELPSTR
       )
 {
-    return cli_create_update_ace(CONST_CAST(char*,vty->index),     /* Type */
+    return cli_create_update_ace(CONST_CAST(char*,(char*)((uintptr_t)vty->index)),     /* Type */
                                  CONST_CAST(char*,vty->index_sub), /* Name */
                                  NULL,                             /* Sequence number */
                                  CONST_CAST(char*,argv[0]),        /* Action */
@@ -684,7 +684,7 @@ DEFUN (cli_access_list_entry_src_port_op_no_seq,
        ACE_ADDITIONAL_OPTIONS_HELPSTR
       )
 {
-    return cli_create_update_ace(CONST_CAST(char*,vty->index),     /* Type */
+    return cli_create_update_ace(CONST_CAST(char*,(char*)((uintptr_t)vty->index)),     /* Type */
                                  CONST_CAST(char*,vty->index_sub), /* Name */
                                  NULL,                             /* Sequence number */
                                  CONST_CAST(char*,argv[0]),        /* Action */
@@ -726,7 +726,7 @@ DEFUN (cli_access_list_entry_src_port_range_no_seq,
        ACE_ADDITIONAL_OPTIONS_HELPSTR
       )
 {
-    return cli_create_update_ace(CONST_CAST(char*,vty->index),     /* Type */
+    return cli_create_update_ace(CONST_CAST(char*,(char*)((uintptr_t)vty->index)),     /* Type */
                                  CONST_CAST(char*,vty->index_sub), /* Name */
                                  NULL,                             /* Sequence number */
                                  CONST_CAST(char*,argv[0]),        /* Action */
@@ -768,7 +768,7 @@ DEFUN (cli_access_list_entry_dst_port_op_no_seq,
        ACE_ADDITIONAL_OPTIONS_HELPSTR
       )
 {
-    return cli_create_update_ace(CONST_CAST(char*,vty->index),     /* Type */
+    return cli_create_update_ace(CONST_CAST(char*,(char*)((uintptr_t)vty->index)),     /* Type */
                                  CONST_CAST(char*,vty->index_sub), /* Name */
                                  NULL,                             /* Sequence number */
                                  CONST_CAST(char*,argv[0]),        /* Action */
@@ -810,7 +810,7 @@ DEFUN (cli_access_list_entry_dst_port_range_no_seq,
        ACE_ADDITIONAL_OPTIONS_HELPSTR
       )
 {
-    return cli_create_update_ace(CONST_CAST(char*,vty->index),     /* Type */
+    return cli_create_update_ace(CONST_CAST(char*,(char*)((uintptr_t)vty->index)),     /* Type */
                                  CONST_CAST(char*,vty->index_sub), /* Name */
                                  NULL,                             /* Sequence number */
                                  CONST_CAST(char*,argv[0]),        /* Action */
@@ -854,7 +854,7 @@ DEFUN (cli_access_list_entry_src_port_op_dst_port_op_no_seq,
        ACE_ADDITIONAL_OPTIONS_HELPSTR
       )
 {
-    return cli_create_update_ace(CONST_CAST(char*,vty->index),     /* Type */
+    return cli_create_update_ace(CONST_CAST(char*,(char*)((uintptr_t)vty->index)),     /* Type */
                                  CONST_CAST(char*,vty->index_sub), /* Name */
                                  NULL,                             /* Sequence number */
                                  CONST_CAST(char*,argv[0]),        /* Action */
@@ -898,7 +898,7 @@ DEFUN (cli_access_list_entry_src_port_range_dst_port_range_no_seq,
        ACE_ADDITIONAL_OPTIONS_HELPSTR
       )
 {
-    return cli_create_update_ace(CONST_CAST(char*,vty->index),     /* Type */
+    return cli_create_update_ace(CONST_CAST(char*,(char*)((uintptr_t)vty->index)),     /* Type */
                                  CONST_CAST(char*,vty->index_sub), /* Name */
                                  NULL,                             /* Sequence number */
                                  CONST_CAST(char*,argv[0]),        /* Action */
@@ -942,7 +942,7 @@ DEFUN (cli_access_list_entry_src_port_op_dst_port_range_no_seq,
        ACE_ADDITIONAL_OPTIONS_HELPSTR
       )
 {
-    return cli_create_update_ace(CONST_CAST(char*,vty->index),     /* Type */
+    return cli_create_update_ace(CONST_CAST(char*,(char*)((uintptr_t)vty->index)),     /* Type */
                                  CONST_CAST(char*,vty->index_sub), /* Name */
                                  NULL,                             /* Sequence number */
                                  CONST_CAST(char*,argv[0]),        /* Action */
@@ -986,7 +986,7 @@ DEFUN (cli_access_list_entry_src_port_range_dst_port_op_no_seq,
        ACE_ADDITIONAL_OPTIONS_HELPSTR
       )
 {
-    return cli_create_update_ace(CONST_CAST(char*,vty->index),     /* Type */
+    return cli_create_update_ace(CONST_CAST(char*,(char*)((uintptr_t)vty->index)),     /* Type */
                                  CONST_CAST(char*,vty->index_sub), /* Name */
                                  NULL,                             /* Sequence number */
                                  CONST_CAST(char*,argv[0]),        /* Action */
@@ -1024,7 +1024,7 @@ DEFUN (cli_access_list_entry_comment,
     /* To be freed after use */
     char *comment_text = argv_concat(argv, argc, 2);
 
-    return cli_create_update_ace(CONST_CAST(char*,vty->index),     /* Type */
+    return cli_create_update_ace(CONST_CAST(char*,(char*)((uintptr_t)vty->index)),     /* Type */
                                  CONST_CAST(char*,vty->index_sub), /* Name */
                                  CONST_CAST(char*,argv[0]),        /* Sequence number */
                                  CONST_CAST(char*,argv[1]),        /* Action */
@@ -1060,7 +1060,7 @@ DEFUN (cli_access_list_entry_comment_no_seq,
     /* To be freed after use */
     char *comment_text = argv_concat(argv, argc, 1);
 
-    return cli_create_update_ace(CONST_CAST(char*,vty->index),     /* Type */
+    return cli_create_update_ace(CONST_CAST(char*,(char*)((uintptr_t)vty->index)),     /* Type */
                                  CONST_CAST(char*,vty->index_sub), /* Name */
                                  NULL,                             /* Sequence number */
                                  CONST_CAST(char*,argv[0]),        /* Action */
@@ -1095,7 +1095,7 @@ DEFUN (cli_no_access_list_entry_comment,
        ACE_COMMENT_HELPSTR
       )
 {
-    return cli_create_update_ace(CONST_CAST(char*,vty->index),     /* Type */
+    return cli_create_update_ace(CONST_CAST(char*,(char*)((uintptr_t)vty->index)),     /* Type */
                                  CONST_CAST(char*,vty->index_sub), /* Name */
                                  CONST_CAST(char*,argv[0]),        /* Sequence number */
                                  CONST_CAST(char*,argv[1]),        /* Action */
@@ -1143,7 +1143,7 @@ DEFUN (cli_no_access_list_entry,
        ACE_SEQ_HELPSTR
       )
 {
-    return cli_delete_ace(CONST_CAST(char*,vty->index),     /* Type */
+    return cli_delete_ace(CONST_CAST(char*,(char*)((uintptr_t)vty->index)),     /* Type */
                           CONST_CAST(char*,vty->index_sub), /* Name */
                           CONST_CAST(char*,argv[0]));       /* Sequence number */
 }
@@ -1280,7 +1280,7 @@ DEFUN (cli_apply_access_list, cli_apply_access_list_cmd,
     }
 
     return cli_apply_acl(interface_type_str,           /* interface type */
-                         CONST_CAST(char*,vty->index), /* interface id */
+                         CONST_CAST(char*,(char*)((uintptr_t)vty->index)), /* interface id */
                          type_str,                     /* type */
                          CONST_CAST(char*,argv[1]),    /* name */
                          CONST_CAST(char*,argv[2]));   /* direction */
@@ -1321,7 +1321,7 @@ DEFUN (cli_no_apply_access_list, cli_no_apply_access_list_cmd,
     }
 
     return cli_unapply_acl(interface_type_str,           /* interface type */
-                           CONST_CAST(char*,vty->index), /* interface id */
+                           CONST_CAST(char*,(char*)((uintptr_t)vty->index)), /* interface id */
                            type_str,                     /* type */
                            CONST_CAST(char*,argv[1]),    /* name */
                            CONST_CAST(char*,argv[2]));   /* direction */

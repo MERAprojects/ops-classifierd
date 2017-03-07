@@ -344,7 +344,7 @@ qos_queue_profile_command_commit(const char *profile_name)
 
     strncpy(g_profile_name, profile_name, sizeof(g_profile_name));
     vty->node = QOS_QUEUE_PROFILE_NODE;
-    vty->index = g_profile_name;
+    vty->index = (uintptr_t)g_profile_name;
     return CMD_SUCCESS;
 }
 
@@ -633,7 +633,7 @@ DEFUN(qos_queue_profile_name,
 {
     char aubuf[QOS_CLI_AUDIT_BUFFER_SIZE] = "op=CLI: name queue";
 
-    const char *profile_name = (char*) vty->index;
+    const char *profile_name = (char*)((uintptr_t)vty->index);
     qos_audit_encode(aubuf, sizeof(aubuf), "profile_name", profile_name);
 
     const char *queue_num = argv[0];
@@ -798,7 +798,7 @@ DEFUN(qos_queue_profile_name_no,
 {
     char aubuf[QOS_CLI_AUDIT_BUFFER_SIZE] = "op=CLI: no name queue";
 
-    const char *profile_name = (char*) vty->index;
+    const char *profile_name = (char*)((uintptr_t)vty->index);
     qos_audit_encode(aubuf, sizeof(aubuf), "profile_name", profile_name);
 
     const char *queue_num = argv[0];
@@ -948,7 +948,7 @@ DEFUN(qos_queue_profile_map,
 {
     char aubuf[QOS_CLI_AUDIT_BUFFER_SIZE] = "op=CLI: map queue";
 
-    const char *profile_name = (char*) vty->index;
+    const char *profile_name = (char*)((uintptr_t)vty->index);
     qos_audit_encode(aubuf, sizeof(aubuf), "profile_name", profile_name);
 
     const char *queue_num = argv[0];
@@ -1120,7 +1120,7 @@ DEFUN(qos_queue_profile_map_no,
 {
     char aubuf[QOS_CLI_AUDIT_BUFFER_SIZE] = "op=CLI: no map queue";
 
-    const char *profile_name = (char*) vty->index;
+    const char *profile_name = (char*)((uintptr_t)vty->index);
     qos_audit_encode(aubuf, sizeof(aubuf), "profile_name", profile_name);
 
     const char *queue_num = argv[0];
